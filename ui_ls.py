@@ -26,7 +26,7 @@ class Ui_Form(object):
         self.tabWidget.setFont(font)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        self.image_widget = QWidget(self.tab)
+        self.image_widget = QFrame(self.tab)
         self.image_widget.setObjectName(u"image_widget")
         self.image_widget.setGeometry(QRect(480, 10, 960, 540))
         self.result_label = QLabel(self.tab)

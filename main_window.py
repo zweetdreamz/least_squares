@@ -46,6 +46,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         self.sigma9_line_edit.setValidator(float_validator)
         self.sigma10_line_edit.setValidator(float_validator)
         self.comboBox.addItems(['Black', 'Green', 'Blue', 'Yellow'])
+
+        import pyqtgraph as pg
+        self.graph_widget = pg.PlotWidget(self.image_widget)
+        self.graph_widget.setObjectName(u"image_widget")
+        self.graph_widget.setGeometry(*(0, 0, 960, 540))
+        self.graph_widget.setBackground('w')
+        styles = {"color": "#f00", "font-size": "10px"}
+        self.graph_widget.setLabel("left", "Ox", **styles)
+        self.graph_widget.setLabel("bottom", "Oy", **styles)
+
+        hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
+
+        # plot data: x, y values
+        self.graph_widget.plot(hour, temperature)
+
+
         self.show()
         self.update()
 
