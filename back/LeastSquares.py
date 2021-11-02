@@ -1,4 +1,4 @@
-from List import List
+from back.List import List
 
 
 class LeastSquares:

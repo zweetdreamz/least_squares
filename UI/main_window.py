@@ -8,7 +8,7 @@ import csv
 
 from pyqtgraph.exporters import ImageExporter
 
-from .ui_ls import Ui_Form
+from UI.ui_ls import Ui_Form
 from back import LeastSquares
 
 
