@@ -1,1 +1,1 @@
-pip install pyside2==5.15.2
+Сalculation of a straight line y=a*x+b by points using the least squares method.
