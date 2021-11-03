@@ -13,10 +13,12 @@ class LeastSquares:
 
     def calculate(self):
         delta = sum((self.X ** 2) / (self.Sy ** 2)) * sum(self.Sy ** (-2)) - (sum(self.X / (self.Sy ** 2))) ** 2
-        delta_a = sum((self.X * self.Y) / (self.Sy ** 2)) * sum(self.Sy ** (-2)) - sum(self.X / (self.Sy ** 2)) * sum(self.Y / (self.Sy ** 2))
-        delta_b = sum((self.X ** 2) / (self.Sy ** 2)) * sum(self.Y / (self.Sy ** 2)) - sum(self.X / (self.Sy ** 2)) * sum((self.X * self.Y) / (self.Sy ** 2))
-        self.a = delta_a/delta
-        self.b = delta_b/delta
+        delta_a = sum((self.X * self.Y) / (self.Sy ** 2)) * sum(self.Sy ** (-2)) - sum(self.X / (self.Sy ** 2)) * sum(
+            self.Y / (self.Sy ** 2))
+        delta_b = sum((self.X ** 2) / (self.Sy ** 2)) * sum(self.Y / (self.Sy ** 2)) - sum(
+            self.X / (self.Sy ** 2)) * sum((self.X * self.Y) / (self.Sy ** 2))
+        self.a = delta_a / delta
+        self.b = delta_b / delta
         self.s_a = sum(self.Sy ** (-2)) / delta
         self.s_b = sum((self.X ** 2) / (self.Sy ** 2)) / delta
 
@@ -24,7 +26,7 @@ class LeastSquares:
         Y_avg = List([sum(self.Y) / self.n for i in range(self.n)])
         s_x = sum((self.X - X_avg) ** 2) / (self.n - 1)
         s_y = sum((self.Y - Y_avg) ** 2) / (self.n - 1)
-        self.r = sum(abs((self.X - X_avg) * (self.Y - Y_avg))) / ((self.n - 1) * (s_x * s_y)**(1/2))
+        self.r = sum(abs((self.X - X_avg) * (self.Y - Y_avg))) / ((self.n - 1) * (s_x * s_y) ** (1 / 2))
 
     def get_result(self):
         if self.r is None: self.calculate()

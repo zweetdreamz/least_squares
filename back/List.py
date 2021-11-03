@@ -40,15 +40,15 @@ class List(list):
 
 
 if __name__ == "__main__":
-    a = List([1,2,3])
-    b = List([2,3,4])
-    c = a-b
+    a = List([1, 2, 3])
+    b = List([2, 3, 4])
+    c = a - b
     print(a, c, type(c))
-    c = a/b
+    c = a / b
     print(a, c, type(c))
-    c = a**2
+    c = a ** 2
     print(a, c, type(c))
-    c = a*b
+    c = a * b
     print(a, c, type(c))
     a = abs(a)
     print(a, c, type(c))
