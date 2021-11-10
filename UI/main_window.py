@@ -135,6 +135,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         styles = {"color": "black", "font-size": "20px"}
         self.graph_widget.setLabel("left", "Ox " + self.lineEdit_2.text(), **styles)
         self.graph_widget.setLabel("bottom", "Oy " + self.lineEdit.text(), **styles)
+        self.result_label.setText(f's_a = {s_a}\ns_b = {s_b}\nr = {r}')
 
     def calculate_imported(self):
         """
@@ -169,6 +170,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         styles = {"color": "black", "font-size": "20px"}
         self.graph_widget.setLabel("left", "Ox " + self.lineEdit_2.text(), **styles)
         self.graph_widget.setLabel("bottom", "Oy " + self.lineEdit.text(), **styles)
+        self.result_label.setText(f's_a = {s_a}\ns_b = {s_b}\nr = {r}')
 
     def save_image(self):
         """
