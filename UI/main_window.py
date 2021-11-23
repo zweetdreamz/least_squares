@@ -72,105 +72,111 @@ class MainWindow(QtWidgets.QMainWindow, Ui_Form):
         тут будем считать все по точкам
         :return:
         """
-        self.graph_widget.clear()
+        try:
+            self.graph_widget.clear()
 
-        x = [
-            self.x1_line_edit.text(),
-            self.x2_line_edit.text(),
-            self.x3_line_edit.text(),
-            self.x4_line_edit.text(),
-            self.x5_line_edit.text(),
-            self.x6_line_edit.text(),
-            self.x7_line_edit.text(),
-            self.x8_line_edit.text(),
-            self.x9_line_edit.text(),
-            self.x10_line_edit.text(),
-        ]
-        # убираем недействительные значения
-        x = [i for i in x if i]
-        # приведение типа данных
-        x = list(map(float, x))
+            x = [
+                self.x1_line_edit.text(),
+                self.x2_line_edit.text(),
+                self.x3_line_edit.text(),
+                self.x4_line_edit.text(),
+                self.x5_line_edit.text(),
+                self.x6_line_edit.text(),
+                self.x7_line_edit.text(),
+                self.x8_line_edit.text(),
+                self.x9_line_edit.text(),
+                self.x10_line_edit.text(),
+            ]
+            # убираем недействительные значения
+            x = [i for i in x if i]
+            # приведение типа данных
+            x = list(map(float, x))
 
-        y = [
-            self.y1_line_edit.text(),
-            self.y2_line_edit.text(),
-            self.y3_line_edit.text(),
-            self.y4_line_edit.text(),
-            self.y5_line_edit.text(),
-            self.y6_line_edit.text(),
-            self.y7_line_edit.text(),
-            self.y8_line_edit.text(),
-            self.y9_line_edit.text(),
-            self.y10_line_edit.text(),
-        ]
-        # убираем недействительные значения
-        y = [i for i in y if i]
-        # приведение типа данных
-        y = list(map(float, y))
+            y = [
+                self.y1_line_edit.text(),
+                self.y2_line_edit.text(),
+                self.y3_line_edit.text(),
+                self.y4_line_edit.text(),
+                self.y5_line_edit.text(),
+                self.y6_line_edit.text(),
+                self.y7_line_edit.text(),
+                self.y8_line_edit.text(),
+                self.y9_line_edit.text(),
+                self.y10_line_edit.text(),
+            ]
+            # убираем недействительные значения
+            y = [i for i in y if i]
+            # приведение типа данных
+            y = list(map(float, y))
 
-        s = [
-            self.sigma1_line_edit.text(),
-            self.sigma2_line_edit.text(),
-            self.sigma3_line_edit.text(),
-            self.sigma4_line_edit.text(),
-            self.sigma5_line_edit.text(),
-            self.sigma6_line_edit.text(),
-            self.sigma7_line_edit.text(),
-            self.sigma8_line_edit.text(),
-            self.sigma9_line_edit.text(),
-            self.sigma10_line_edit.text(),
-        ]
-        # убираем недействительные значения
-        s = [i for i in s if i]
-        # приведение типа данных
-        s = list(map(float, s))
+            s = [
+                self.sigma1_line_edit.text(),
+                self.sigma2_line_edit.text(),
+                self.sigma3_line_edit.text(),
+                self.sigma4_line_edit.text(),
+                self.sigma5_line_edit.text(),
+                self.sigma6_line_edit.text(),
+                self.sigma7_line_edit.text(),
+                self.sigma8_line_edit.text(),
+                self.sigma9_line_edit.text(),
+                self.sigma10_line_edit.text(),
+            ]
+            # убираем недействительные значения
+            s = [i for i in s if i]
+            # приведение типа данных
+            s = list(map(float, s))
 
-        # инициализация мат ядра
-        core = LeastSquares.LeastSquares(x, y, s)
-        a, b, s_a, s_b, r = core.get_result()
+            # инициализация мат ядра
+            core = LeastSquares.LeastSquares(x, y, s)
+            a, b, s_a, s_b, r = core.get_result()
 
-        # построение графика
-        self.graph_widget.plot(x, [a * i + b for i in x], pen=pg.mkPen(color=self.comboBox.currentText(), width=3))
-        self.graph_widget.scatterPlot(x, y, pen=pg.mkPen(color=(255, 0, 0), width=1))
-        styles = {"color": "black", "font-size": "20px"}
-        self.graph_widget.setLabel("left", "Ox " + self.lineEdit_2.text(), **styles)
-        self.graph_widget.setLabel("bottom", "Oy " + self.lineEdit.text(), **styles)
-        self.result_label.setText(f's_a = {s_a}\ns_b = {s_b}\nr = {r}')
+            # построение графика
+            self.graph_widget.plot(x, [a * i + b for i in x], pen=pg.mkPen(color=self.comboBox.currentText(), width=3))
+            self.graph_widget.scatterPlot(x, y, pen=pg.mkPen(color=(255, 0, 0), width=1))
+            styles = {"color": "black", "font-size": "20px"}
+            self.graph_widget.setLabel("left", "Ox " + self.lineEdit_2.text(), **styles)
+            self.graph_widget.setLabel("bottom", "Oy " + self.lineEdit.text(), **styles)
+            self.result_label.setText(f's_a = {s_a}\ns_b = {s_b}\nr = {r}')
+        except:
+            self.result_label.setText(f'Ошибка вычисления. Убедитесь в корректности введенных результатов.')
 
     def calculate_imported(self):
         """
         тут будем считать все по точкам из фала
         :return:
         """
-        self.graph_widget.clear()
+        try:
+            self.graph_widget.clear()
 
-        curPath = QDir.currentPath()  # Get the current directory of the system
-        title = "Open a file"  # Dialog title
-        filter = "CSV file (*.csv);; All files (*.*)"  # File filter
-        filename, flt = QFileDialog.getOpenFileName(self, title, curPath, filter)
-        if not filename:
-            return
+            curPath = QDir.currentPath()  # Get the current directory of the system
+            title = "Open a file"  # Dialog title
+            filter = "CSV file (*.csv);; All files (*.*)"  # File filter
+            filename, flt = QFileDialog.getOpenFileName(self, title, curPath, filter)
+            if not filename:
+                return
 
-        with open(filename, newline='') as csvfile:
-            reader = csv.reader(csvfile, delimiter=';', quotechar='|')
-            data = list([*row] for row in reader)
+            with open(filename, newline='') as csvfile:
+                reader = csv.reader(csvfile, delimiter=';', quotechar='|')
+                data = list([*row] for row in reader)
 
-        # приведение типа данных
-        x = list(float(row[0]) for row in data)
-        y = list(float(row[1]) for row in data)
-        s = list(float(row[2]) for row in data)
+            # приведение типа данных
+            x = list(float(row[0]) for row in data)
+            y = list(float(row[1]) for row in data)
+            s = list(float(row[2]) for row in data)
 
-        # инициализация мат ядра
-        core = LeastSquares.LeastSquares(x, y, s)
-        a, b, s_a, s_b, r = core.get_result()
+            # инициализация мат ядра
+            core = LeastSquares.LeastSquares(x, y, s)
+            a, b, s_a, s_b, r = core.get_result()
 
-        # построение графика
-        self.graph_widget.plot(x, [a*i + b for i in x], pen=pg.mkPen(color=self.comboBox.currentText(), width=3))
-        self.graph_widget.scatterPlot(x, y, pen=pg.mkPen(color=(255, 0, 0), width=1))
-        styles = {"color": "black", "font-size": "20px"}
-        self.graph_widget.setLabel("left", "Ox " + self.lineEdit_2.text(), **styles)
-        self.graph_widget.setLabel("bottom", "Oy " + self.lineEdit.text(), **styles)
-        self.result_label.setText(f's_a = {s_a}\ns_b = {s_b}\nr = {r}')
+            # построение графика
+            self.graph_widget.plot(x, [a * i + b for i in x], pen=pg.mkPen(color=self.comboBox.currentText(), width=3))
+            self.graph_widget.scatterPlot(x, y, pen=pg.mkPen(color=(255, 0, 0), width=1))
+            styles = {"color": "black", "font-size": "20px"}
+            self.graph_widget.setLabel("left", "Ox " + self.lineEdit_2.text(), **styles)
+            self.graph_widget.setLabel("bottom", "Oy " + self.lineEdit.text(), **styles)
+            self.result_label.setText(f's_a = {s_a}\ns_b = {s_b}\nr = {r}')
+        except:
+            self.result_label.setText(f'Ошибка вычисления. Убедитесь в корректности введенных результатов.')
 
     def save_image(self):
         """
